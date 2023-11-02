@@ -1,11 +1,11 @@
 class Like < ApplicationRecord
-    belongs_to :post, foreign_key: 'PostId'
+  belongs_to :post, foreign_key: 'PostId'
 
-    after_create :increment_post_likes_counter
+  after_create :increment_post_likes_counter
 
-    private
+  private
 
-    def increment_post_likes_counter
-        post.increment!(:LikesCounter).save
-    end
+  def increment_post_likes_counter
+    post.increment!(:LikesCounter).save
+  end
 end
