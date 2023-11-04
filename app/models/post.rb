@@ -5,8 +5,7 @@ class Post < ApplicationRecord
 
   after_create :increment_user_posts_counter
 
-
-   def recent_comments
+  def recent_comments
     comments.order(created_at: :desc).limit(5)
   end
 
@@ -16,6 +15,3 @@ class Post < ApplicationRecord
     user.increment!(:PostsCounter).save
   end
 end
-
-
-  
