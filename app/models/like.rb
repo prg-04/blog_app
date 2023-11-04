@@ -1,5 +1,6 @@
 class Like < ApplicationRecord
-  belongs_to :post, foreign_key: 'PostId'
+  belongs_to :post, foreign_key: 'post_id'
+  belongs_to :user, foreign_key: 'user_id'
 
   after_create :increment_post_likes_counter
 
@@ -9,3 +10,4 @@ class Like < ApplicationRecord
     post.increment!(:LikesCounter).save
   end
 end
+

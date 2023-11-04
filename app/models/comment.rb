@@ -1,5 +1,8 @@
 class Comment < ApplicationRecord
-  belongs_to :post, foreign_key: 'PostId'
+  belongs_to :post, foreign_key: 'post_id'
+  belongs_to :user, foreign_key: 'user_id'
+  has_many :likes
+
 
   after_create :increment_post_comments_counter
 
@@ -8,4 +11,6 @@ class Comment < ApplicationRecord
   def increment_post_comments_counter
     post.increment!(:CommentsCounter).save
   end
+
+
 end
