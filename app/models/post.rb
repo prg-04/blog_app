@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
+
   has_many :comments
   has_many :likes
 
@@ -8,6 +9,7 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 250 }
   validates :commentsCounter, numericality: { greater_than_or_equal_to: 0 }
   validates :likesCounter, numericality: { greater_than_or_equal_to: 0 }
+
 
   def recent_comments
     comments.order(created_at: :desc).limit(5)
