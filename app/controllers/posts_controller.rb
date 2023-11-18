@@ -13,11 +13,13 @@ class PostsController < ApplicationController
   end
 
   def create
+    @user = User.find(params[:user_id])
     @post = @user.posts.build(post_params)
 
     if @post.save
       redirect_to user_posts_path(@user), notice: 'Post was successfully created.'
     else
+      # Handle the case where the post couldn't be saved
       render :new
     end
   end
@@ -38,14 +40,5 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :text)
-
-    @user = User.find_by_id(params[:user_id])
-    @post = @user.posts.find_by_id(params[:id])
-
-    # You might want to handle the case where @post is nil, for example:
-    return unless @post.nil?
-
-    flash[:alert] = 'Post not found'
-    redirect_to user_posts_path(@user)
   end
 end
