@@ -1,8 +1,0 @@
-<%= form_with(model: @like, url: user_post_likes_path(@user, @post), method: :post) do |form| %>
-  <!-- Add any necessary hidden fields or other data -->
-  <%= form.hidden_field :post_id, value: @post.id %>
-  <!-- Submit button -->
-  <div class="flex items-center">
-    <%= form.submit 'Like Post', class: 'bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline' %>
-  </div>
-<% end %>
