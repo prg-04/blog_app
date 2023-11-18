@@ -1,8 +1,38 @@
 <% if @user %>
-  <h1>Here is <%= @user.name %> Post</h1>
-  <h3><%= @post.title %></h3>
+  <div class="border">
+    <div class="flex flex-col items-start  min-h-100 h-80 p-4 w-100">
+      <div class="overflow-hidden overflow-ellipsis h-16">
+       <p class="">Post #<%= @post.id %> by <%= @user.name %></p>
+      </div>
+      <div class="flex gap-2 relative self-end bottom-4 left-42">
+        <p>
+          comments: <%= link_to @post.commentsCounter, user_post_path(@user, @post) %>
+        </p>,
+        <p>
+          likes: <%= link_to @post.likesCounter, user_post_path(@user, @post) %>
+        </p>
+      </div> 
 
-<p><%= @post.text %></p>
+      <%= @post.text %>
+    </div>
+    <ul class="block border">
+  <li class="block w-100">
+    <div class="flex flex-col border items-start min-h-52 overflow-y-scroll p-4 w-100">
+  <%= link_to "Comments", user_post_path(@user, @post, anchor: "comments"), class: "text-xl mb-4" %>
+  <% if @post.comments.any? %>
+    <% @post.comments.each_with_index do |comment, comment_index| %>
+      <div class="border-t pt-4">
+      <%= comment.user.name %>:
+    <%= link_to "#{comment.text}", user_post_path(@user, @post, anchor: "comments"), class: "text-sm mb-2" %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No comments yet.</p>
+  <% end %>
+</div>
+  </li>
+</ul>
+ 
 <% else %>
   <p>User not found</p>
 <% end %>

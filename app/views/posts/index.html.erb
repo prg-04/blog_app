@@ -1,10 +1,36 @@
 <% if @user %>
-  <h1>Here is a list of posts from <%= @user.name %></h1>
   <ul>
-  <% @posts.each do |post| %>
-    <li><%= link_to post.title, user_post_path(@user, post) %></li>
-  <% end %>
-</ul>
+     <%= render partial: "layouts/user_card" %>
+    <% @posts.each_with_index do |post, index| %>
+        <li class="my-3 h-100">
+      <div class="flex flex-col border items-start min-h-100 h-72 p-4 w-100">
+        <%= link_to "Post ##{index + 1}", user_post_path(@user, post), class: "text-xl mb-4" %>
+        <div class="overflow-hidden overflow-ellipsis h-48">
+          <%= post.text %>
+        </div>
+        <div class="flex gap-2 relative self-end top-4 left-42">
+          <p> comments:
+            <%= link_to post.commentsCounter, user_post_path(@user, post) %>
+          </p>,
+          <p> likes:
+            <%= link_to post.likesCounter, user_post_path(@user, post) %>
+          </p>
+        </div> 
+      </div>
+       
+
+<ul>
+            <% post.recent_comments.each do |comment| %>
+              <li class="pt-4">
+                <%= comment.user.name %>:
+               <%= link_to "#{comment.text}", user_post_path(@user, post, anchor: "comments"), class: "text-lg mb-2" %>
+              </li>
+            <% end %>
+          </ul>
+
+      </li>
+    <% end %>
+  </ul>
 <% else %>
   <p>User not found</p>
 <% end %>
