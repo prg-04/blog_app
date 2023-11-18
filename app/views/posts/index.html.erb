@@ -24,6 +24,7 @@
               <li class="pt-4">
                 <%= comment.user.name %>:
                 <%= link_to "Comment ##{comment.id}", user_post_path(@user, post, anchor: "comments"), class: "text-lg mb-2" %>
+
               </li>
             <% end %>
           </ul>
