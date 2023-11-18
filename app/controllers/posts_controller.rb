@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def new
-     @user = User.find(params[:user_id])
+    @user = User.find(params[:user_id])
     @post = Post.new
   end
 
@@ -33,7 +33,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = params[:id] == "new" ? nil : @user.posts.find_by(id: params[:id])
+    @post = params[:id] == 'new' ? nil : @user.posts.find_by(id: params[:id])
   end
 
   def post_params
@@ -47,6 +47,5 @@ class PostsController < ApplicationController
 
     flash[:alert] = 'Post not found'
     redirect_to user_posts_path(@user)
-
   end
 end
