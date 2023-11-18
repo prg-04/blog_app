@@ -1,0 +1,27 @@
+<%= form_with(model: [@user, @post], url: user_posts_path(@user)) do |form| %>
+  <!-- Display validation errors in your new.html.erb -->
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= form.label :title, 'Post Title', class: 'block text-gray-700 text-sm font-bold mb-2' %>
+    <%= form.text_field :title, class: 'w-full border rounded-md py-2 px-3 focus:outline-none focus:shadow-outline' %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :text, 'Post Content', class: 'block text-gray-700 text-sm font-bold mb-2' %>
+    <%= form.text_area :text, class: 'w-full border rounded-md py-2 px-3 focus:outline-none focus:shadow-outline' %>
+  </div>
+
+  <div class="flex items-center">
+    <%= form.submit 'Create Post', class: 'bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline' %>
+  </div>
+<% end %>
