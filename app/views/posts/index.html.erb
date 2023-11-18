@@ -1,10 +1,52 @@
 <% if @user %>
-  <h1>Here is a list of posts from <%= @user.name %></h1>
   <ul>
-  <% @posts.each do |post| %>
-    <li><%= link_to post.title, user_post_path(@user, post) %></li>
+    <li class="flex flex-col sm:flex-row">
+      <img src="<%= @user.photo %>" alt="photo" class="img-fluid img-thumbnail h-50 w-50" />
+      <div class="flex border items-center h-32 sm:h-56 p-4 w-100">
+        <%= link_to @user.name, @user, class: "text-4xl" %>
+        <p class="relative self-end top-8 left-8 sm:left-1/4"> Number of posts:
+          <%= link_to @user.postCounter, @user %>
+        </p> 
+      </div>
+    </li>
+    <% @posts.each_with_index do |post, index| %>
+        <li class="my-3 h-100">
+      <div class="flex flex-col border items-start min-h-100 h-72 p-4 w-100">
+        <%= link_to "Post ##{index + 1}", user_post_path(@user, post), class: "text-xl mb-4" %>
+        <div class="overflow-hidden overflow-ellipsis h-48">
+          <%= post.text %>
+        </div>
+        <div class="flex gap-2 relative self-end top-4 left-42">
+          <p> comments:
+            <%= link_to post.commentsCounter, user_post_path(@user, post) %>
+          </p>,
+          <p> likes:
+            <%= link_to post.commentsCounter, user_post_path(@user, post) %>
+          </p>
+        </div> 
+      </div>
+        <ul>
+  <li>
+    <div class="flex flex-col border items-start min-h-52 p-4 w-100 h-100 overflow-y-scroll">
+  <%= link_to "Comments", user_post_path(@user, post, anchor: "comments"), class: "text-xl mb-4" %>
+  <% if post.comments.any? %>
+    <% post.comments.each_with_index do |comment, comment_index| %>
+      <div class="border-t pt-4">
+      <%= comment.user.name %>:
+        <%= link_to "Comment #{comment_index + 1}", user_post_path(@user, post, anchor: "comments"), class: "text-lg mb-2" %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No comments yet.</p>
   <% end %>
+</div>
+
+  </li>
 </ul>
+
+      </li>
+    <% end %>
+  </ul>
 <% else %>
   <p>User not found</p>
 <% end %>
