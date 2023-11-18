@@ -1,5 +1,8 @@
-<h1>Here is <%= @user.name %> Post</h1>
-<h3><%= @post.title %></h3>
+<% if @user %>
+  <h1>Here is <%= @user.name %> Post</h1>
+  <h3><%= @post.title %></h3>
 
 <p><%= @post.text %></p>
-
+<% else %>
+  <p>User not found</p>
+<% end %>

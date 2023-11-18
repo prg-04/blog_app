@@ -46,7 +46,7 @@ RSpec.describe Post, type: :model do
 
   it 'should validate the presence of text' do
     post = build(:post, user:, text: nil)
-    expect(post).to be_valid, 'Post is not valid without text'
+    expect(post).not_to be_valid, 'Post is valid without text'
   end
 
   it 'should validate commentsCounter to be greater than or equal to 0' do
