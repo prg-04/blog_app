@@ -4,7 +4,8 @@
     <% @posts.each_with_index do |post, index| %>
         <li class="my-3 h-100">
       <div class="flex flex-col border items-start min-h-100 h-72 p-4 w-100">
-        <%= link_to "Post ##{index + 1}", user_post_path(@user, post), class: "text-xl mb-4" %>
+        <%= link_to post.title, user_post_path(@user, post), class: "text-xl mb-4" %>
+
         <div class="overflow-hidden overflow-ellipsis h-48">
           <%= post.text %>
         </div>
@@ -23,7 +24,8 @@
             <% post.recent_comments.each do |comment| %>
               <li class="pt-4">
                 <%= comment.user.name %>:
-                <%= link_to "Comment ##{comment.id}", user_post_path(@user, post, anchor: "comments"), class: "text-lg mb-2" %>
+                <%= link_to "#{comment.text}", user_post_path(@user, post, anchor: "comments"), class: "text-lg mb-2" %>
+
 
               </li>
             <% end %>
