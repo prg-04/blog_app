@@ -1,14 +1,14 @@
 <h1>Users</h1>
 
-<ul class="list-unstyled ">
+<ul class="flex flex-col w-100 h-100 border border-red-500">
   <% @users.each do |user| %>
-    <li class="flex items-center justify-center my-2 ">
-      <div class="w-100 h-100">
-        <img src="<%= user.photo %>" alt="photo" class="object-cover h-56 w-100" />
+    <li class="flex items-center my-2 min-w-100 border border-green-500">
+      <div class="w-72 h-full border border-indigo-500 border-8">
+        <img src="<%= user.photo %>" alt="photo" class="object-cover h-56 min-w-72 w-full" />
       </div>
-      <div class="flex border items-center min-h-52 h-56 p-4 w-100">
+      <div class="border border-blue-500 border-8 flex items-center  min-h-52 h-56 p-4 w-screen">
         <%=  link_to user.name, user, class: "text-4xl" %>
-       <p class="relative  self-end top-8 left-1/4"> Number of posts:
+       <p class="relative  self-end top-4 left-2/4 lg:left-3/4"> Number of posts:
                 <%=  link_to user.postCounter, user %>
        </p> 
       </div>

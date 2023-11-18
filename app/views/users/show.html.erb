@@ -1,11 +1,11 @@
 <div class="flex flex-col">
   <ul>
-      <%= render partial: "layouts/users_card" %>
-    <% if @user %>
-  <% @posts.each_with_index do |post, index| %>
+    <%= render partial: "layouts/user_card" %>  
+  <% if @user %>
+    <p class="pl-2 mt-2"><%= @user.name %>  <%= link_to "Posts", user_posts_path(@user)  %> </p>
+  <% @user.recent_posts.each_with_index do |post, index| %>
 
     <div class="border mt-4">
-    <p class="pl-2 "><%= @user.name %>  <%= link_to "Posts", user_posts_path(@user)  %> </p>
 
     <li class="my-3 h-100">
       <div class="flex flex-col border items-start min-h-100 h-72 p-4 w-100">
@@ -18,7 +18,7 @@
             <%= link_to post.commentsCounter, user_post_path(@user, post) %>
           </p>,
           <p> likes:
-            <%= link_to post.commentsCounter, user_post_path(@user, post) %>
+            <%= link_to post.likesCounter, user_post_path(@user, post) %>
           </p>
         </div> 
       </div>
@@ -30,7 +30,9 @@
   <% end %>
 </ul>
 
-<button class="self-center m-2"><%= link_to "list of all Users", root_path, class: "bg-primary text-white no-underline p-2  rounded-lg" %>
+<button class="self-center m-2">
+  <%= link_to "list of all Users", root_path, class: "bg-indigo-600 text-white no-underline p-2 rounded-lg" %>
 </button>
+
 
 </div>
