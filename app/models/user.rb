@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :likes
 
+  validates :bio, presence: true
   validates :name, presence: true, uniqueness: false
   validates :email, presence: false, uniqueness: false, allow_blank: true
   validates :password_digest, presence: false, uniqueness: false, allow_blank: true

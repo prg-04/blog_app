@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :user do
-    # your user attributes here
+    name { 'John Doe' }
+    bio { 'Lorem ipsum dolor sit amet.' }
+    postCounter { 0 }
   end
 end
