@@ -1,8 +1,8 @@
-<% if @user %>
+<% if @user && @post %>
   <div class="border">
-    <div class="flex flex-col items-start  min-h-100 h-80 p-4 w-100">
+    <div class="flex flex-col items-start min-h-100 h-80 p-4 w-100">
       <div class="overflow-hidden overflow-ellipsis h-16">
-       <p class="">Post #<%= @post.id %> by <%= @user.name %></p>
+        <p class="">Post #<%= @post.id %> by <%= @user.name %></p>
       </div>
       <div class="flex gap-2 relative self-end bottom-4 left-42">
         <p>
@@ -16,23 +16,36 @@
       <%= @post.text %>
     </div>
     <ul class="block border">
-  <li class="block w-100">
-    <div class="flex flex-col border items-start min-h-52 overflow-y-scroll p-4 w-100">
-  <%= link_to "Comments", user_post_path(@user, @post, anchor: "comments"), class: "text-xl mb-4" %>
-  <% if @post.comments.any? %>
-    <% @post.comments.each_with_index do |comment, comment_index| %>
-      <div class="border-t pt-4">
-      <%= comment.user.name %>:
-    <%= link_to "#{comment.text}", user_post_path(@user, @post, anchor: "comments"), class: "text-sm mb-2" %>
-      </div>
-    <% end %>
-  <% else %>
-    <p>No comments yet.</p>
-  <% end %>
-</div>
-  </li>
-</ul>
- 
+      <li class="block w-100">
+        <div class="flex flex-col border items-start min-h-52 overflow-y-scroll p-4 w-100">
+          <%= link_to "Comments", user_post_path(@user, @post, anchor: "comments"), class: "text-xl mb-4" %>
+          <% if @post.comments.any? %>
+            <% @post.comments.each_with_index do |comment, comment_index| %>
+              <div class="border-t pt-4">
+                <%= comment.user.name %>:
+                <%= link_to " #{comment.text}", user_post_path(@user, @post, anchor: "comments"), class: "text-lg mb-2" %>
+
+              </div>
+            <% end %>
+          <% else %>
+            <p>No comments yet.</p>
+          <% end %>
+        </div>
+      </li>
+    </ul>
+  </div>
+
 <% else %>
-  <p>User not found</p>
+  <p>User or post not found</p>
 <% end %>
+
+<div class="flex justify-between mt-4">
+      <%= link_to "Add Comment", new_user_post_comment_path(@user, @post), class: "bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline" %>
+
+<%= form_with(model: @like, url: user_post_likes_path(@user, @post), method: :post) do |form| %>
+  <div class="flex items-center">
+    <%= form.submit 'Like Post', class: 'bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline' %>
+  </div>
+<% end %>
+
+    </div>

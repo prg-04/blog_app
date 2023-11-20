@@ -1,9 +1,11 @@
+# config/routes.rb
 Rails.application.routes.draw do
-
   root to: "main#index"
 
-  resources :users, only: [:index , :show,] do
-    resources :posts, only: [:index, :show, :create]
+  resources :users, only: [:index, :show] do
+    resources :posts, only: [:index, :show, :new, :create ] do
+      resources :comments, only: [:new, :create]
+      resources :likes, only: [:new, :create] 
+    end
   end
-
 end
