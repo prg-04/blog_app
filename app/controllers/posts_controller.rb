@@ -14,7 +14,7 @@ class PostsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
-    @post = @user.posts.build(post_params)
+    @post = @user.posts.new(post_params)
 
     if @post.save
       redirect_to user_posts_path(@user), notice: 'Post was successfully created.'

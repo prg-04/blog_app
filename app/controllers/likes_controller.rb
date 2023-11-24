@@ -2,6 +2,7 @@ class LikesController < ApplicationController
   before_action :set_user_and_post
 
   def create
+    @post = Post.find(params[:post_id])
     @like = @post.likes.build(user: current_user)
 
     if @like.save

@@ -4,10 +4,10 @@ one:
   name: MyString
   photo: MyString
   bio: MyText
-  postCounter: 1
+  postsCounter: 0
 
 two:
   name: MyString
   photo: MyString
   bio: MyText
-  postCounter: 1
+  postsCounter: 0

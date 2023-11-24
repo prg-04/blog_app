@@ -1,5 +1,6 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'rails_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
@@ -12,6 +13,9 @@ require 'factory_bot_rails'
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 end
+
+require 'capybara/rails'
+require 'capybara/rspec'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

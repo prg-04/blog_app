@@ -18,11 +18,11 @@ RSpec.describe User, type: :model do
     expect(user).not_to be_valid, 'User without bio should not be valid'
   end
 
-  it 'postCounter should be greater than or equal to 0' do
-    user = build(:user, postCounter: 0)
+  it 'postsCounter should be greater than or equal to 0' do
+    user = build(:user, postsCounter: 0)
     expect(user).to be_valid, 'User with postCounter equal to 0 should be valid'
 
-    user.postCounter = -1
+    user.postsCounter = -1
     expect(user).not_to be_valid, 'User with negative postCounter should not be valid'
   end
 end
