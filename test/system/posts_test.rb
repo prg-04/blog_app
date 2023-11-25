@@ -1,4 +1,4 @@
-require "application_system_test_case"
+require 'application_system_test_case'
 require 'test_helper'
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
@@ -8,7 +8,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     @post_two = posts(:two)
   end
 
-  test "should get posts index" do
+  test 'should get posts index' do
     get user_posts_path(@user)
     assert_response :success
 
@@ -19,7 +19,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should show post details" do
+  test 'should show post details' do
     get user_post_path(@user, @post_one)
     assert_response :success
 
@@ -33,7 +33,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'div.border-t.pt-4', count: 2
   end
 
-  test "should show post details with comments" do
+  test 'should show post details with comments' do
     comment_one = comments(:one)
     comment_two = comments(:two)
 

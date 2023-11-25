@@ -1,4 +1,4 @@
-require "application_system_test_case"
+require 'application_system_test_case'
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
@@ -7,7 +7,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user_two = users(:two)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get users_url
     assert_response :success
 
@@ -16,7 +16,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select 'li', count: User.count
   end
 
-  test "should display user information in index" do
+  test 'should display user information in index' do
     get root_url
     assert_response :success
 
@@ -24,12 +24,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       assert_select 'img', count: 2
       assert_select 'a', text: @user_one.name
       assert_select 'a', text: @user_two.name
-      assert_select 'p', text: "Number of posts: 1", count: 0
-      assert_select 'p', text: "Number of posts: 1", count: 0
+      assert_select 'p', text: 'Number of posts: 1', count: 0
+      assert_select 'p', text: 'Number of posts: 1', count: 0
     end
   end
 
-  test "should show user information in show" do
+  test 'should show user information in show' do
     get user_url(@user_one)
     assert_response :success
 

@@ -1,4 +1,4 @@
-require "application_system_test_case"
+require 'application_system_test_case'
 require 'test_helper'
 
 class CommentsControllerTest < ActionDispatch::IntegrationTest
@@ -8,7 +8,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     @comment = comments(:one)
   end
 
-  test "should create comment" do
+  test 'should create comment' do
     assert_difference('Comment.count', 1) do
       post user_post_comments_path(@user, @post), params: { comment: { text: 'New comment' } }
     end
@@ -18,6 +18,4 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select 'li', text: /New comment/, count: 1
   end
-
-
 end
