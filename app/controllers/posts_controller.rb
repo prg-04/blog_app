@@ -1,41 +1,38 @@
 class PostsController < ApplicationController
-  before_action :set_user
-  before_action :set_post, only: [:show]
-
+  before_action :find_user_post, only: [:show]
+  # GET /posts
   def index
-    @posts = @user.posts if @user
-    @comments = @user.comments
+    @user = User.includes(posts: :comments).find(params[:id])
+    @posts = @user.posts
+    @param = params
   end
 
+  # GET /posts/:id
+  def show; end
+
   def new
-    @user = User.find(params[:user_id])
-    @post = Post.new
+    @user = current_user
+    @post = @user.posts.new
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @post = @user.posts.build(post_params)
+    @user = current_user
+    @post = @user.posts.new(post_params)
+    @par = post_params
 
     if @post.save
-      redirect_to user_posts_path(@user), notice: 'Post was successfully created.'
+      redirect_to user_post_path(user_id: @user, id: @post), notice: 'Post was successfully created.'
     else
-      # Handle the case where the post couldn't be saved
       render :new
     end
   end
 
-  def show
-    @post = @user.posts.find_by(id: params[:id])
-  end
-
   private
 
-  def set_user
-    @user = User.find(params[:user_id])
-  end
-
-  def set_post
-    @post = params[:id] == 'new' ? nil : @user.posts.find_by(id: params[:id])
+  def find_user_post
+    @user = User.includes(posts: :comments).find(params[:user_id])
+    @post_id = params[:id]
+    @post = @user.posts.find(@post_id)
   end
 
   def post_params

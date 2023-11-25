@@ -1,0 +1,10 @@
+.comments-container {
+  box-sizing: border-box;
+  border: solid 2px black;
+  border-radius: 4px;
+  padding: 1% 2%;
+  margin-inline: 5%;
+  margin-top: -1.5rem;
+  display: flex;
+  flex-direction: column;
+}

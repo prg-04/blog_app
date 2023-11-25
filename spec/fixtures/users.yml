@@ -1,0 +1,17 @@
+user1:
+  name: Tom Cruise
+  posts_counter: 0
+  bio: actor
+  photo: https://example.com/tom.jpg
+
+user2:
+  name: Mel Gibson
+  posts_counter: 3
+  bio: actor
+  photo: https://example.com/gibson.jpg
+
+user3:
+  name: Russel Crowe
+  posts_counter: 2
+  bio: actor
+  photo: https://example.com/russel.jpg

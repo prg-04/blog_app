@@ -1,15 +1,16 @@
 class User < ApplicationRecord
-  has_many :posts
-  has_many :comments
+  has_many :posts, foreign_key: :author_id
   has_many :likes
+  has_many :comments, foreign_key: :author_id
 
-  validates :bio, presence: true
-  validates :name, presence: true, uniqueness: false
-  validates :email, presence: false, uniqueness: false, allow_blank: true
-  validates :password_digest, presence: false, uniqueness: false, allow_blank: true
-  validates :postCounter, numericality: { greater_than_or_equal_to: 0 }
+  validates :name, presence: true, length: { maximum: 255 }
+  validates :posts_counter, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   def recent_posts
     posts.order(created_at: :desc).limit(3)
+  end
+
+  def first_three_posts
+    posts.order(created_at: :asc).limit(3)
   end
 end
