@@ -77,11 +77,15 @@ GEM
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
     base64 (0.2.0)
+    bcrypt (3.1.20)
     bigdecimal (3.1.4)
     bindex (0.8.1)
     bootsnap (1.17.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    bullet (7.1.4)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     capybara (3.39.2)
       addressable
       matrix
@@ -100,6 +104,12 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    devise (4.9.3)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
     diff-lcs (1.5.0)
     drb (2.2.0)
       ruby2_keywords
@@ -146,12 +156,13 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.4-x86_64-linux)
+    nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
+    orm_adapter (0.5.0)
     pg (1.5.4)
     psych (5.1.1.1)
       stringio
-    public_suffix (5.0.3)
+    public_suffix (5.0.4)
     puma (6.4.0)
       nio4r (~> 2.0)
     racc (1.7.3)
@@ -202,6 +213,9 @@ GEM
     regexp_parser (2.8.2)
     reline (0.4.0)
       io-console (~> 0.5)
+    responders (3.1.1)
+      actionpack (>= 5.2)
+      railties (>= 5.2)
     rexml (3.2.6)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
@@ -249,6 +263,9 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uniform_notifier (1.16.0)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -268,13 +285,17 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  bullet
   capybara
   cssbundling-rails
   debug
+  devise
   factory_bot_rails
   jbuilder
   jsbundling-rails
+  nokogiri (= 1.15.5)
   pg (~> 1.1)
+  public_suffix (= 5.0.4)
   puma (>= 5.0)
   rails (~> 7.1.1)
   rails-controller-testing

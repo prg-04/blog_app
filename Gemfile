@@ -31,6 +31,7 @@ gem 'cssbundling-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
+# gem 'bullet', group: 'development'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -46,7 +47,13 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
+gem 'devise'
+
+gem 'public_suffix', '5.0.4'
+
 gem 'rails-controller-testing'
+
+gem 'nokogiri', '1.15.5'
 
 # gem 'shoulda-matchers', '~> 5.0'
 
@@ -74,6 +81,7 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem 'bullet'
   gem 'capybara'
   gem 'selenium-webdriver'
 end

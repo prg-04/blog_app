@@ -12,12 +12,12 @@ class Post < ApplicationRecord
   validates :likesCounter, numericality: { greater_than_or_equal_to: 0 }
 
   def recent_comments
-    comments.order(created_at: :desc).limit(5)
+    comments.includes(:user).order(created_at: :desc).limit(5)
   end
 
   private
 
   def increment_user_posts_counter
-    user.increment!(:postCounter).save
+    user.increment!(:postsCounter).save
   end
 end

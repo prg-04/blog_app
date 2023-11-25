@@ -1,5 +1,7 @@
+<p style="color: green"><%= notice %></p>
 <% if @user && @post %>
   <div class="border">
+ <%= render partial: "users/user", locals: { user: @user } %>
     <div class="flex flex-col items-start min-h-100 h-80 p-4 w-100">
       <div class="overflow-hidden overflow-ellipsis h-16">
         <p class="">Post #<%= @post.id %> by <%= @user.name %></p>
@@ -20,7 +22,7 @@
         <div class="flex flex-col border items-start min-h-52 overflow-y-scroll p-4 w-100">
           <%= link_to "Comments", user_post_path(@user, @post, anchor: "comments"), class: "text-xl mb-4" %>
           <% if @post.comments.any? %>
-            <% @post.comments.each_with_index do |comment, comment_index| %>
+            <% @post.comments.includes(:user).each_with_index do |comment, comment_index| %>
               <div class="border-t pt-4">
                 <%= comment.user.name %>:
                 <%= link_to " #{comment.text}", user_post_path(@user, @post, anchor: "comments"), class: "text-lg mb-2" %>
@@ -33,13 +35,7 @@
         </div>
       </li>
     </ul>
-  </div>
-
-<% else %>
-  <p>User or post not found</p>
-<% end %>
-
-<div class="flex justify-between mt-4">
+    <div class="flex justify-between mt-4">
       <%= link_to "Add Comment", new_user_post_comment_path(@user, @post), class: "bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline" %>
 
 <%= form_with(model: @like, url: user_post_likes_path(@user, @post), method: :post) do |form| %>
@@ -47,5 +43,11 @@
     <%= form.submit 'Like Post', class: 'bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline' %>
   </div>
 <% end %>
+</div>
+  </div>
 
-    </div>
+<% else %>
+  <p>User or post not found</p>
+<% end %>
+
+

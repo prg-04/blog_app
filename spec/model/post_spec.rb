@@ -18,7 +18,7 @@ RSpec.describe Post, type: :model do
   it "should increment user's postCounter after creation" do
     expect do
       create(:post, user:)
-    end.to change { user.reload.postCounter }.by(1)
+    end.to change { user.reload.postsCounter }.by(1)
   end
 
   it 'should have a recent_comments method' do
