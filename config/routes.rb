@@ -1,6 +1,8 @@
 # config/routes.rb
 Rails.application.routes.draw do
-  root to: "main#index"
+ get '/sign_out_user', to: 'users#sign_out_user', as: 'sign_out_user'
+  devise_for :users
+  root 'users#index'
 
   resources :users, only: [:index, :show] do
     resources :posts, only: [:index, :show, :new, :create ] do
@@ -9,3 +11,4 @@ Rails.application.routes.draw do
     end
   end
 end
+

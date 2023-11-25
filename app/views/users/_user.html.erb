@@ -5,7 +5,7 @@
 
   <div class="flex flex-col h-56 w-screen" style="padding:1rem">
    <p style="position:relative; top:85px; margin-left: 0.5rem">
-     <%= link_to user.name, user, class: "text-4xl"%>
+     <%= link_to user.name, user_path(user), class: "text-4xl" %>
    </p>
     <p class="relative top-36 self-end">Number of posts:
       <%= link_to user.postsCounter, user %>
