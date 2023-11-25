@@ -40,7 +40,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'GET #show' do
-    let(:post) { create(:post, user: user) }
+    let(:post) { create(:post, user:) }
 
     it 'returns a successful response' do
       get :show, params: { user_id: user.id, id: post.id }

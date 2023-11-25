@@ -1,4 +1,4 @@
-require "application_system_test_case"
+require 'application_system_test_case'
 require 'test_helper'
 
 class LikesControllerTest < ActionDispatch::IntegrationTest
@@ -7,7 +7,7 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
     @post = posts(:one)
   end
 
-  test "should create like" do
+  test 'should create like' do
     assert_difference('@post.likesCounter', 0) do
       post user_post_likes_path(@user, @post)
     end
