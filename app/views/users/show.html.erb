@@ -1,45 +1,46 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :head do %>
+    <%= stylesheet_link_tag 'user_show' %>
+<% end %>
 
-<%= render partial: "users/user", locals: { user: @user } %>
 
-<% if @user %>
-    <p class="pl-2 mt-2"><%= @user.name %>  <%= link_to "Posts", user_posts_path(@user)  %> </p>
-  <% @user.recent_posts.each_with_index do |post, index| %>
-
-    <div class="border mt-4">
-
-    <li class="my-3 h-100 list-none" style="list-style:none;">
-          <h2>Title: <%=post.title%></h2>
-      <div class="flex flex-col items-start min-h-100 h-72 p-4 w-100">
-       
-        <div style="margin-top:2rem" class="overflow-hidden overflow-ellipsis h-48">
-          <%= post.text %>
-        </div>
-        <div class="flex gap-2 relative self-end top-4 left-42">
-          <p> comments:
-            <%= link_to post.commentsCounter, user_post_path(@user, post) %>
-          </p>,
-          <p> likes:
-            <%= link_to post.likesCounter, user_post_path(@user, post) %>
-          </p>
-        </div> 
-      </div>
-    </li>
+<div class="user-profile">
+    <div class='photo-container'>
+        <img src="<%= @user.photo %>" alt="user-img" class="user-photo" />
     </div>
-  <% end %>
-<% else %>
-     <p>User not found.</p>
-  <% end %>
-</ul>
-
+    <div class="user-card">
+        <div class="user-info">
+            <h2 class="user-name"><%= @user.name %></h2>
+            <p class="user-post-count">Number of posts: <%= @user.posts_counter %></p>
+        </div>
+    </div>
 </div>
 
-<div class="flex mt-4" style="justify-content:center; margin-top:1rem;">
-  <button class="border rounded-lg" style="padding: 0.5rem; border-radius:10px"><%= link_to "Back to users", users_path %></button>
-
+<div class="user-bio">
+    <h3>Bio</h3>
+    <p class="bio-text"><%= @user.bio %></p>
 </div>
 
+<div class="post-container">
+    <% @user.first_three_posts.each do |post| %>
+        <%= link_to user_post_path(user_id: @user, id: post.id), style: "text-decoration: none;" do %>
+            <div class="single-post">
+                <div class="post-body">
+                    <h3 class="post-title"><%= post.title %></h3>
+                    <p class="post-text"><%= post.text %></p>
+                </div>
+                <div class="like-comment">
+                    <p>
+                        <span>Comments: <%= post.comments_counter %></span>, 
+                        <span>Likes: <%= post.likes_counter || 0 %></span>
+                    </p>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+</div>
 
-   
-
-         
+<%= link_to user_posts_path(id: @user), style: "text-decoration: none;" do %>
+    <div class="button-container">
+        <button>See all posts</button>
+    </div>
+<% end %>

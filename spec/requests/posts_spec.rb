@@ -1,55 +1,63 @@
 require 'rails_helper'
 
-RSpec.describe PostsController, type: :controller do
-  let(:user) { create(:user) }
+RSpec.describe PostsController, type: :request do
+  let(:user) do
+    User.create(
+      name: 'Tom Cruise',
+      posts_counter: 0,
+      bio: 'actor',
+      photo: 'https://example.com/tom.jpg'
+    )
+  end
 
   describe 'GET #index' do
+    before do
+      user.posts.create(title: 'First Post', text: 'Content of post 1')
+      user.posts.create(title: 'Second Post', text: 'Content of post 2')
+    end
+
     it 'returns a successful response' do
-      get :index, params: { user_id: user.id }
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET #new' do
-    it 'returns a successful response' do
-      get :new, params: { user_id: user.id }
-      expect(response).to be_successful
+      get user_posts_path(user)
+      expect(response).to have_http_status(:success)
     end
 
-    it 'assigns a new post to @post' do
-      get :new, params: { user_id: user.id }
-      expect(assigns(:post)).to be_a_new(Post)
-    end
-  end
-
-  describe 'POST #create' do
-    context 'with valid parameters' do
-      it 'creates a new post' do
-        post :create, params: { user_id: user.id, post: attributes_for(:post) }
-        expect(response).to redirect_to(user_posts_path(user))
-        expect(flash[:notice]).to be_present
-      end
+    it 'renders the index template' do
+      get user_posts_path(user)
+      expect(response).to render_template(:index)
     end
 
-    context 'with invalid parameters' do
-      it 'does not create a new post' do
-        post :create, params: { user_id: user.id, post: attributes_for(:post, title: nil) }
-        expect(response).to render_template(:new)
-      end
+    it 'includes correct placeholder text in the response body' do
+      get user_posts_path(user)
+      expect(response.body).to include('First Post')
+      expect(response.body).to include('Content of post 1')
+      expect(response.body).to include('Second Post')
+      expect(response.body).to include('Content of post 2')
     end
   end
 
   describe 'GET #show' do
-    let(:post) { create(:post, user:) }
-
-    it 'returns a successful response' do
-      get :show, params: { user_id: user.id, id: post.id }
-      expect(response).to be_successful
+    let(:post) do
+      user.posts.create(
+        title: 'Hello',
+        text: 'This is my first post'
+      )
     end
 
-    it 'assigns the requested post to @post' do
-      get :show, params: { user_id: user.id, id: post.id }
-      expect(assigns(:post)).to eq(post)
+    it 'returns a successful response' do
+      get user_post_path(user_id: user, id: post)
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'renders the show template' do
+      get user_post_path(user_id: user, id: post)
+      expect(response).to render_template(:show)
+    end
+
+    it 'includes correct placeholder text in the response body' do
+      get user_post_path(user_id: user, id: post)
+      expect(response.body).to include(user.name.to_s)
+      expect(response.body).to include('Hello')
+      expect(response.body).to include('This is my first post')
     end
   end
 end

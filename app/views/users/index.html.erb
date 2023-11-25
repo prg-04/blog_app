@@ -1,13 +1,18 @@
-<div class="flex flex-col">
-  <p style="color: green"><%= notice %></p>
-
-<h1>Users</h1>
-
-<ul class="flex gap-4 flex-col w-100 h-100 border">
-  <% @users.each do |user| %>
-  
-    <%= render user %>
-  <% end %>
-
-</ul>
-</div>
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'user_index' %>
+<% end %>
+<% @users.each do |user| %>
+  <div class="user-profile">
+    <div class='photo-container'>
+      <img src="<%= user.photo %>" alt="user-img" class="user-photo" />
+    </div>
+    <div class="user-card">
+      <%= link_to user_path(user), style: "text-decoration: none;" do %>
+        <div class="user-info">
+            <h2 class="user-name"><%= user.name %></h2>
+            <p class="user-post-count">Number of posts: <%= user.posts_counter %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

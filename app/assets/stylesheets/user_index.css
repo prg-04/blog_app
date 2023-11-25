@@ -1,0 +1,40 @@
+.user-profile {
+  display: flex;
+  padding-inline: 5%;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.photo-container {
+  width: 25%;
+  box-sizing: border-box;
+  border: solid 2px black;
+  height: 6rem;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.user-card {
+  width: 75%;
+  box-sizing: border-box;
+  border: solid 2px black;
+  border-radius: 4px;
+  height: 6rem;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 2rem;
+  color: black;
+}
+
+.user-name {
+  align-self: center;
+}
+
+.user-post-count {
+  align-self: flex-end;
+}

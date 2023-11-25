@@ -1,40 +1,51 @@
-<p style="color: green"><%= notice %></p>
-
-<% if @user %>
-  <%= render @user %>
-
-  <ul>
-    <% @posts.each_with_index do |post, index| %>
-      <li class="my-3 h-100">
-        <div class="flex flex-col border items-start min-h-100 h-72 p-4 w-100">
-          <%= link_to post.title, user_post_path(@user, post), class: "text-xl mb-4" %>
-
-          <div class="overflow-hidden overflow-ellipsis h-48">
-            <%= post.text %>
-          </div>
-
-          <div class="flex gap-2 relative self-end top-4 left-42">
-            <p> comments:
-              <%= link_to post.commentsCounter, user_post_path(@user, post) %>
-            </p>,
-            <p> likes:
-              <%= link_to post.likesCounter, user_post_path(@user, post) %>
-            </p>
-          </div>
-
-          <ul>
-            <h4>Comments</h4>
-            <% post.recent_comments.to_a.each do |comment| %>
-              <li class="pt-4">
-                <%= comment.user.name %>:
-                <%= link_to "#{comment.text}", user_post_path(@user, post, anchor: "comments"), class: "text-lg mb-2" %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>User not found</p>
+<% content_for :head do %>
+    <%= stylesheet_link_tag 'user_show' %>
+    <%= stylesheet_link_tag 'post_index' %>
 <% end %>
+  
+<div class="user-profile">
+    <div class='photo-container'>
+        <img src="<%= @user.photo %>" alt="user-profile" class="user-photo" />
+    </div>
+    <div class="user-card">
+        <div class="user-info">
+            <h2 class="user-name"><%= @user.name %></h2>
+            <p class="user-post-count">Number of posts: <%= @user.posts_counter %></p>
+        </div>
+    </div>
+</div>
+<div class="post-container">
+    <% @posts.each do |post| %>
+        <%= link_to user_post_path(user_id: @user, id: post.id), style: "text-decoration: none;" do %>
+        <div class="single-post">
+            <div class="post-body">
+                <h3 class="post-title"><%= post.title %></h3>
+                <p class="post-text"><%= post.text %></p>
+            </div>
+            <div class="like-comment">
+                <p>
+                    <span>Comments: <%= post.comments_counter %></span>, 
+                    <span>Likes: <%= post.likes_counter || 0 %></span>
+                </p>
+            </div>
+        </div>
+        <% end %>
+        <div class="comments-container">
+          <% post.comments.each do |comment| %>
+            <p>
+             <span><strong><%= comment.author.name %></strong></span>: 
+             <span><%= comment.text %></span>
+            </p>
+          <% end %>
+        </div>
+    
+    <% end %>
+
+    <div class="button-container">
+      <button 
+        onclick="window.location.href='<%= new_user_post_path(@user) %>'"
+        >
+            pagination
+        </button>
+    </div>
+</div>

@@ -1,17 +1,14 @@
-<%= form_with(model: Comment.new, url: user_post_comments_path(@user, @post), method: :post) do |form| %>
-  <div class="flex flex-col">
-    <!-- Add hidden fields or other necessary data -->
-    <%= form.hidden_field :post_id, value: @post.id %>
+<h1>New Comment</h1>
+<h2>Author: <%= @user.name %></h2>
 
-    <!-- Comment text area -->
-    <div class="mb-4">
-      <%= form.label :text, 'Your Comment', class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= form.text_area :text, class: 'w-full border rounded-md py-2 px-3 focus:outline-none focus:shadow-outline' %>
-    </div>
+<%= form_with(model: [@user, @post, @comment]) do |form| %>
 
-    <!-- Submit button -->
-    <div class="flex items-center">
-      <%= form.submit 'Create Comment', class: 'bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline' %>
-    </div>
+  <div class="field">
+    <%= form.label :text %>
+    <%= form.text_area :text %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Comment" %>
   </div>
 <% end %>

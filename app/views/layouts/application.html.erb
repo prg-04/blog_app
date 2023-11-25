@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BlogApp</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Include Tailwind CSS from CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
+    <title>MyBlog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>

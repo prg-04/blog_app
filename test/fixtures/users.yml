@@ -1,13 +1,15 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+user1:
+  name: Tom Cruise
+  posts_counter: 0
+  bio: actor
+  photo: https://example.com/tom.jpg
+  created_at: Thu, 02 Nov 2023 06:43:25.347985000 UTC +00:00
+  updated_at: Thu, 02 Nov 2023 06:43:25.347985000 UTC +00:00
 
-one:
-  name: MyString
-  photo: MyString
-  bio: MyText
-  postsCounter: 0
-
-two:
-  name: MyString
-  photo: MyString
-  bio: MyText
-  postsCounter: 0
+user2:
+  name: Mel Gibson
+  posts_counter: 3
+  bio: actor
+  photo: https://example.com/gibson.jpg
+  created_at: Tue, 07 Nov 2023 06:57:50.539254000 UTC +00:00
+  updated_at: Tue, 07 Nov 2023 06:57:50.539254000 UTC +00:00
